@@ -1,0 +1,861 @@
+/* 全局样式重置 + 无白色深色系背景 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* 全局网页背景（中深灰，无白色） */
+body {
+    background-color: #e0e2e6;
+    line-height: 1.6;
+    min-height: 100vh;
+    color: #212529;
+}
+
+/* 通用图标样式（可复用） */
+.icon-sm { font-size: 16px; }
+.icon-md { font-size: 20px; }
+.icon-lg { font-size: 24px; }
+.icon-xl { font-size: 32px; }
+.icon-primary { color: #2c3e50; }
+.icon-secondary { color: #f1c40f; }
+.icon-accent { color: #e74c3c; }
+
+/* 导航栏核心修复：强制横排+固定顶部+层级最高 */
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #343a40; /* 高级深灰导航底 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    z-index: 9999; /* 最高层级，不被遮挡 */
+    flex-wrap: nowrap; /* 强制不换行，横排核心 */
+}
+
+/* 导航主菜单容器 - 强制横排，无换行 */
+.fixed-nav .links {
+    display: flex;
+    gap: 35px; /* 主菜单间距，适配20px大字体 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap; /* 子菜单也不换行 */
+}
+
+/* 主菜单项 - 相对定位，包含下拉菜单 */
+.nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* 主菜单链接 - 无框+20px大字体+白色文字+横排 */
+.nav-item > a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* 文字和下拉箭头的间距 */
+    white-space: nowrap; /* 文字不换行 */
+}
+
+/* 主菜单hover：底部金色横线 */
+.nav-item > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f1c40f;
+    transition: width 0.3s ease;
+}
+.nav-item > a:hover::after {
+    width: 100%;
+}
+
+/* 下拉菜单容器 - 绝对定位+隐藏，hover主菜单时显示 */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #495057; /* 比导航稍浅的灰，层级清晰 */
+    min-width: 200px; /* 下拉菜单最小宽度 */
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* 轻微上移，hover时滑下 */
+    transition: all 0.3s ease;
+    z-index: 9999;
+    margin: 0;
+    padding: 5px 0;
+}
+
+/* 主菜单项hover时，显示下拉菜单 */
+.nav-item:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 下拉菜单项链接样式 */
+.dropdown li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px;
+    display: block; /* 占满整行，方便点击 */
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    white-space: nowrap; /* 下拉文字不换行 */
+}
+
+/* 下拉菜单项hover：背景金色+文字白 */
+.dropdown li a:hover {
+    background: #f1c40f;
+    color: #ffffff;
+}
+
+/* 导航右侧图标 - 无框+适配深色导航+横排 */
+.fixed-nav .icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    flex-wrap: nowrap; /* 图标不换行 */
+}
+.fixed-nav .icons li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.fixed-nav .icons a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* 图标文字不换行 */
+}
+.fixed-nav .icons a:hover {
+    color: #f1c40f; /* 图标hover变金色 */
+}
+.icon-text {
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+/* 轮播容器 - 淡入淡出核心样式 */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden; /* 隐藏超出部分 */
+    margin-top: 80px;
+    z-index: 1;
+}
+
+/* 轮播幻灯片容器 - 取消flex滑动，改为定位叠加 */
+.carousel-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 单个幻灯片 - 淡入淡出核心 */
+.carousel-slide {
+    position: absolute; /* 所有幻灯片叠加在一起 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* 默认隐藏 */
+    visibility: hidden;
+    transition: opacity 2s ease, visibility 2s ease; /* 淡入淡出过渡 */
+}
+
+/* 激活的幻灯片 - 显示 */
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 轮播图片 */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持比例，覆盖容器 */
+}
+
+/* 轮播文字说明 */
+.carousel-caption {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    max-width: 500px;
+}
+
+.carousel-caption h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.carousel-caption p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* 轮播控制按钮 */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: #f1c40f;
+    color: #343a40;
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* 轮播指示器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.indicator.active {
+    background: #f1c40f;
+    transform: scale(1.2); /* 激活的指示器放大 */
+}
+
+/* 移动端轮播适配 */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 250px;
+        margin-top: 120px;
+    }
+    .carousel-caption {
+        bottom: 20px;
+        left: 20px;
+        padding: 10px 15px;
+        max-width: 80%;
+    }
+    .carousel-caption h2 {
+        font-size: 18px;
+    }
+    .carousel-caption p {
+        font-size: 14px;
+    }
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* 首页介绍区（浅一级灰，无白色，和全局呼应） */
+#intro {
+    padding: 60px 20px;
+    text-align: center;
+    background: #e9ecef;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    z-index: 1;
+}
+#intro h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+#intro p {
+    font-size: 18px;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 产品展示【核心优化：图放大+间距缩小，3列紧凑布局】 */
+#products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* 紧凑间距，无多余留白 */
+    padding: 30px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    z-index: 1;
+}
+.product-card {
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px; /* 缩小内边距，让图片占比最大化 */
+    text-align: center;
+    background: #f1f3f5;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    scale: 1.02;
+}
+.product-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #666;
+    background: #e9ecef;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+.product-card:hover .product-icon {
+    color: #2c3e50;
+    background: #f1c40f;
+}
+/* 产品图片放大核心样式 */
+.product-card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-height: 0;
+}
+.product-card:hover img {
+    scale: 1.03;
+}
+.product-card .info {
+    margin-top: 8px;
+    flex-shrink: 0;
+}
+.product-card .info h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+.product-card .info p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* OEM板块样式（无白色，内边距紧凑） */
+#oem {
+    padding: 40px;
+    background: #e9ecef;
+    margin: 20px auto;
+    max-width: 1400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    z-index: 1;
+}
+#oem h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #2c3e50;
+}
+#oem p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 16px;
+}
+.oem-list {
+    max-width: 800px;
+    margin: 0 auto;
+    list-style: none;
+}
+.oem-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    padding: 15px 20px;
+    background: #f1f3f5;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+.oem-list li:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+}
+.oem-list li i {
+    font-size: 20px;
+    color: #2c3e50;
+    width: 30px;
+    text-align: center;
+}
+
+/* 分页样式 - 简洁3页码版（适配深色导航，风格统一） */
+.pagination {
+    text-align: center;
+    padding: 30px 0;
+    width: 100%;
+    z-index: 1;
+}
+.pagination ul {
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+.pagination li {
+    display: inline-block;
+}
+.pagination a {
+    text-decoration: none;
+    color: #212529;
+    padding: 10px 20px;
+    border: 2px solid #495057;
+    background: #f1f3f5;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    font-weight: 500;
+}
+.pagination a:hover, .pagination a.active {
+    background: #f1c40f;
+    color: white;
+    border-color: #f1c40f;
+}
+.pagination .hidden {
+    display: none !important;
+}
+
+/* 页脚样式（深灰蓝，和导航深色呼应） */
+#footer {
+    background: #2c3e50;
+    color: #fff;
+    padding: 60px;
+    margin-top: 40px;
+    z-index: 1;
+}
+.contact-section {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+.contact-section h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.contact-section p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.contact-section p i {
+    color: #f1c40f;
+    width: 20px;
+    text-align: center;
+}
+#footer div {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #bdc3c7;
+}
+
+/* 移动端适配（仅小屏幕触发，大屏保持横排） */
+@media (max-width: 992px) {
+    /* 中等屏幕开始微调，不直接竖排 */
+    .fixed-nav {
+        padding: 15px 20px;
+    }
+    .fixed-nav .links {
+        gap: 20px;
+    }
+    .nav-item > a {
+        font-size: 18px;
+    }
+    .dropdown {
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 仅手机端竖排，大屏始终横排 */
+    .fixed-nav {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .fixed-nav .links {
+        gap: 15px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .fixed-nav .icons {
+        gap: 15px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .carousel-container {
+        margin-top: 120px;
+        height: 250px;
+    }
+    .carousel-caption {
+        bottom: 20px;
+        left: 20px;
+        padding: 10px 15px;
+    }
+    .carousel-caption h2 {
+        font-size: 18px;
+    }
+    .carousel-caption p {
+        font-size: 14px;
+    }
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    #products {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 20px 15px;
+    }
+    .product-card {
+        padding: 12px;
+    }
+    .product-icon {
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        top: 12px;
+        right: 12px;
+    }
+    #oem {
+        padding: 20px;
+    }
+    .oem-list li {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    .pagination ul {
+        gap: 8px;
+    }
+    .pagination a {
+        padding: 8px 15px !important;
+        font-size: 14px;
+    }
+    #intro h1 {
+        font-size: 28px;
+    }
+    #intro p {
+        font-size: 16px;
+    }
+    #footer {
+        padding: 30px 20px;
+    }
+    .contact-section p {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* 导航栏图标弹窗 - 二维码/链接样式 */
+/* 图标容器：相对定位，用于弹窗绝对定位 */
+.fixed-nav .icons li {
+    position: relative;
+}
+
+/* 二维码弹窗容器 - 隐藏+绝对定位 */
+.qr-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+    width: 200px; /* 二维码弹窗宽度 */
+    text-align: center;
+}
+
+/* 二维码图片样式 */
+.qr-popup img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+/* 二维码下方文字 */
+.qr-popup p {
+    font-size: 14px;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+/* hover图标时显示弹窗 */
+.fixed-nav .icons li:hover .qr-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* WhatsApp链接样式优化 */
+.whatsapp-link {
+    transition: all 0.3s ease;
+}
+.whatsapp-link:hover {
+    color: #25D366 !important; /* WhatsApp品牌绿 */
+}
+
+/* 移动端弹窗适配 */
+@media (max-width: 768px) {
+    .qr-popup {
+        right: auto;
+        left: 0;
+        width: 180px;
+    }
+}
+
+/* 联系表单弹窗核心样式 - 优化高度+行距 */
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-form-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: #ffffff;
+    width: 90%;
+    max-width: 500px; /* 缩小弹窗宽度，减少横向占比 */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 25px; /* 减少内边距，压缩高度 */
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    max-height: 85vh; /* 限制弹窗高度为屏幕85%，避免溢出 */
+    overflow-y: auto; /* 仅极端情况才滚动 */
+}
+
+.contact-form-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-title {
+    font-size: 22px; /* 缩小标题字体 */
+    color: #343a40;
+    margin-bottom: 15px; /* 减少标题下方间距 */
+    font-weight: 600;
+    border-bottom: 2px solid #f1c40f;
+    padding-bottom: 8px; /* 减少标题下划线间距 */
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+.close-modal:hover {
+    color: #f1c40f;
+}
+
+/* 表单布局优化 - 压缩行距核心 */
+.contact-form {
+    display: block;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 12px; /* 大幅压缩字段间距（原20px→12px） */
+}
+
+.form-label {
+    font-size: 13px; /* 缩小标签字体 */
+    color: #343a40;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px; /* 减少标签和输入框间距（原8px→5px） */
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px; /* 减少输入框内边距（原12px→10px） */
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #343a40;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #f1c40f;
+    box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.1);
+}
+
+.form-textarea {
+    min-height: 80px; /* 缩短文本域高度（原120px→80px） */
+    resize: vertical;
+}
+
+/* 提交按钮 - 确保置顶可见 */
+.submit-btn {
+    background: #343a40;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0; /* 减少按钮内边距 */
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: block;
+    margin-top: 8px; /* 减少按钮上方间距 */
+}
+.submit-btn:hover {
+    background: #f1c40f;
+    color: #343a40;
+}
+
+.success-message {
+    display: none;
+    text-align: center;
+    padding: 20px 15px;
+    color: #28a745;
+    font-size: 15px;
+}
+.success-message.active {
+    display: block;
+}
+
+/* 移动端额外优化 */
+@media (max-width: 768px) {
+    .contact-form-modal {
+        padding: 20px;
+        max-width: 95%;
+        max-height: 90vh;
+    }
+    .modal-title {
+        font-size: 20px;
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+    .form-textarea {
+        min-height: 70px;
+    }
+}

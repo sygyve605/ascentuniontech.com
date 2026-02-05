@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCENT UNION TECH INC</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- 导航栏完整容器（核心修复：添加fixed-nav外层div） -->
+    <div class="fixed-nav">
+        <!-- 导航栏主菜单 + 下拉菜单 -->
+        <ul class="links">
+            <li class="nav-item">
+                <a href="#">Home <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                <ul class="dropdown">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Company News</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#products">Products <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                <ul class="dropdown">
+                    <li><a href="#">Vape Pods</a></li>
+                    <li><a href="#">Disposable Vapes</a></li>
+                    <li><a href="#">Vape Accessories</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#">OEM <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                <ul class="dropdown">
+                    <li><a href="#">OEM Customization</a></li>
+                    <li><a href="#">Design Service</a></li>
+                    <li><a href="#">Sample Making</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#">ODM <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                <ul class="dropdown">
+                    <li><a href="#">ODM Development</a></li>
+                    <li><a href="#">Tech Solution</a></li>
+                    <li><a href="#">Mass Production</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+    <!-- 核心：href="#footer" 是触发弹窗的标识，保留这个href -->
+    <a href="#footer">Contact <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+    <ul class="dropdown">
+        <!-- 关键：下拉菜单里的Contact Us也用href="#footer" -->
+        <li><a href="#footer">Contact Us</a></li> 
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Feedback</a></li>
+    </ul>
+</li>
+        </ul>
+		
+        <!-- 导航右侧图标（补充完整，和样式匹配） -->
+        <ul class="icons">
+    <!-- WeChat：hover弹出二维码 -->
+    <li>
+        <a href="#"><i class="fab fa-weixin"></i> <span class="icon-text">WeChat</span></a>
+        <!-- 二维码弹窗：替换src为你的微信二维码图片路径 -->
+        <div class="qr-popup">
+            <img src="images/cert/WeChat.jpg" alt="WeChat QR Code">
+            <p>Add Our WeChat</p>
+        </div>
+    </li>
+<!-- WhatsApp：hover弹出二维码 + 点击跳转聊天链接 -->
+    <li>
+        <!-- 替换手机号：8619068070605 → 你的WhatsApp手机号（去掉+和空格） -->
+        <a href="https://wa.me/8619068070605" class="whatsapp-link" target="_blank">
+            <i class="fab fa-whatsapp"></i> <span class="icon-text">WhatsApp</span>
+        </a>
+        <!-- 替换WhatsApp二维码路径 -->
+        <div class="qr-popup">
+            <img src="images/cert/WhatsApp.jpg" alt="WhatsApp QR Code">
+            <p>扫码加WhatsApp / Scan to Add</p>
+        </div>
+    </li>
+</ul>
+    </div>
+
+    <!-- 新增轮播图区域 -->
+    <div class="carousel-container" id="carousel">
+        <div class="carousel-slides">
+            <!-- 轮播图1 - 路径修正为images/banner/ -->
+            <div class="carousel-slide active">
+                <img src="images/banner/banner1.jpg" alt="Vape Manufacturer Banner 1">
+                <div class="carousel-caption">
+                    <h2>Professional Vape Manufacturing</h2>
+                    <p>High Quality Disposable & Rechargeable Vapes</p>
+                </div>
+            </div>
+            <!-- 轮播图2 - 路径修正为images/banner/ -->
+            <div class="carousel-slide">
+                <img src="images/banner/banner2.jpg" alt="Vape Manufacturer Banner 2">
+                <div class="carousel-caption">
+                    <h2>OEM/ODM Custom Solutions</h2>
+                    <p>Custom Logo, Packaging & Formula</p>
+                </div>
+            </div>
+            <!-- 轮播图3 - 路径修正为images/banner/ -->
+            <div class="carousel-slide">
+                <img src="images/banner/banner3.jpg" alt="Vape Manufacturer Banner 3">
+                <div class="carousel-caption">
+                    <h2>Global Wholesale Supply</h2>
+                    <p>Fast Delivery & Competitive Price</p>
+                </div>
+            </div>
+        </div>
+        <!-- 轮播控制按钮 -->
+        <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        <!-- 轮播指示器 -->
+        <div class="carousel-indicators">
+            <span class="indicator active" data-index="0"></span>
+            <span class="indicator" data-index="1"></span>
+            <span class="indicator" data-index="2"></span>
+        </div>
+    </div>
+	
+    <!-- 首页介绍 -->
+    <section id="intro">
+        <h1>ASCENT UNION TECH INC</h1>
+        <p>Professional Vape Manufacturer - Disposable, Rechargeable & Pod System Solutions with OEM/ODM Support</p>
+    </section>
+
+    <!-- 产品展示（9个产品，路径修正为images/product/） -->
+    <section id="products">
+        <!-- 第1行 -->
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-smoking"></i>
+            </div>
+            <img src="images/product/pic01.jpg" alt="Disposable Vape">
+            <div class="info">
+                <h3>Disposable Vape</h3>
+                <p>Puff:600-5000 | E-liquid:2-12ml | OEM Support</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-battery-charging"></i>
+            </div>
+            <img src="images/product/pic02.jpg" alt="Rechargeable Disposable">
+            <div class="info">
+                <h3>Rechargeable Disposable</h3>
+                <p>Puff:8000-15000 | E-liquid:12-20ml | USB-C Rechargeable</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-cube"></i>
+            </div>
+            <img src="images/product/pic03.jpg" alt="Pod System">
+            <div class="info">
+                <h3>Pod System</h3>
+                <p>Battery:400-1000mAh | Pod:2-5ml | Custom Logo</p>
+            </div>
+        </div>
+        <!-- 第2行 -->
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-smoking"></i>
+            </div>
+            <img src="images/product/pic04.jpg" alt="Mini Disposable Vape">
+            <div class="info">
+                <h3>Mini Disposable Vape</h3>
+                <p>Puff:300-800 | E-liquid:1.2-2ml | Pocket Size</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-battery-full"></i>
+            </div>
+            <img src="images/product/pic05.jpg" alt="High Capacity Vape">
+            <div class="info">
+                <h3>High Capacity Vape</h3>
+                <p>Puff:15000+ | E-liquid:20ml | Long Lasting</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-vial"></i>
+            </div>
+            <img src="images/product/pic06.jpg" alt="Nicotine Free Vape">
+            <div class="info">
+                <h3>Nicotine Free Vape</h3>
+                <p>0mg Nicotine | Multiple Flavors | Healthy Option</p>
+            </div>
+        </div>
+        <!-- 第3行 -->
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <img src="images/product/pic07.jpg" alt="Colorful Vape">
+            <div class="info">
+                <h3>Colorful Vape</h3>
+                <p>10+ Colors | Custom Design | Fashion Style</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-box"></i>
+            </div>
+            <img src="images/product/pic08.jpg" alt="Bulk Vape Pack">
+            <div class="info">
+                <h3>Bulk Vape Pack</h3>
+                <p>10/20/50 PCS Pack | Wholesale Price | OEM</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <img src="images/product/pic09.jpg" alt="Global Vape">
+            <div class="info">
+                <h3>Global Vape Series</h3>
+                <p>CE/FDA Certified | Export to 50+ Countries</p>
+            </div>
+        </div>
+    </section>
+    <!-- 分页导航（英文版本） -->
+    <div class="pagination">
+        <ul id="pagination-list">
+            <li class="page-item" data-page="1"><a href="#" class="page-link">Page 1</a></li>
+            <li class="page-item" data-page="2"><a href="#" class="page-link">Page 2</a></li>
+            <li class="page-item" data-page="3"><a href="#" class="page-link">Page 3</a></li>
+            <li class="page-item hidden" data-page="4"><a href="#" class="page-link">Page 4</a></li>
+            <li class="page-item hidden" data-page="5"><a href="#" class="page-link">Page 5</a></li>
+            <li class="page-item hidden" data-page="6"><a href="#" class="page-link">Page 6</a></li>
+            <li class="page-item hidden" data-page="7"><a href="#" class="page-link">Page 7</a></li>
+            <li class="page-item hidden" data-page="8"><a href="#" class="page-link">Page 8</a></li>
+            <li class="page-item hidden" data-page="9"><a href="#" class="page-link">Page 9</a></li>
+            <li class="page-item hidden" data-page="10"><a href="#" class="page-link">Page 10</a></li>
+        </ul>
+    </div>
+
+    
+    <!-- 页脚 -->
+    <footer id="footer">
+        <section class="contact-section">
+            <h3>Contact Us</h3>
+            <p>
+                <i class="fas fa-map-marker-alt"></i>
+                7901 4th St N Ste 300, St. Petersburg, FL 33702
+            </p>
+            <p>
+                <i class="fas fa-phone"></i>
+                Phone: (+86) 19068070605
+            </p>
+            <p>
+                <i class="fas fa-envelope"></i>
+                Email: ascentunion13@gmail.com
+            </p>
+        </section>
+        <div>&copy; 2026 ASCENT UNION TECH INC</div>
+		
+		<!-- 联系表单遮罩层 -->
+<div class="form-overlay" id="formOverlay"></div>
+
+<!-- 联系表单弹窗 -->
+<div class="contact-form-modal" id="contactModal">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <h3 class="modal-title">Contact Us</h3>
+    
+    <!-- 提交成功提示 -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
+        Your message has been sent successfully! <br>
+        We will contact you within 24 hours.
+    </div>
+
+    <!-- 表单内容 -->
+    <form class="contact-form" id="contactForm">
+        <div class="form-group">
+            <label class="form-label" for="name">Full Name *</label>
+            <input type="text" class="form-input" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input type="email" class="form-input" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input type="tel" class="form-input" id="phone" name="phone" placeholder="Enter your phone number (WhatsApp preferred)">
+        </div>
+		
+        <!-- 暂时注释掉Subject字段，精简弹窗 -->
+    <!-- <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input type="text" class="form-input" id="subject" name="subject" placeholder="Message subject (e.g., OEM Inquiry, Product Price)">
+        </div> -->
+        <div class="form-group">
+            <label class="form-label" for="message">Your Requirements *</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Please describe your needs (e.g., product type, quantity, customization requirements, etc.)" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Inquiry</button>
+    </form>
+</div>
+    </footer>
+
+    <!-- 引用外部JS文件 -->
+    <script src="assets/js/pagination.js"></script>
+    <!-- 新增轮播JS -->
+    <script src="assets/js/carousel.js"></script>
+	<!-- 联系表单弹窗JS -->
+<script>
+    // 获取元素
+    const formOverlay = document.getElementById('formOverlay');
+    const contactModal = document.getElementById('contactModal');
+    const closeModal = document.getElementById('closeModal');
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    // 所有Contact Us链接（导航栏+页脚）
+    const contactLinks = document.querySelectorAll('a[href="#footer"]');
+
+    // 打开弹窗
+    function openModal() {
+        formOverlay.classList.add('active');
+        contactModal.classList.add('active');
+        // 滚动锁定
+        document.body.style.overflow = 'hidden';
+    }
+
+    // 关闭弹窗
+    function closeModalFunc() {
+        formOverlay.classList.remove('active');
+        contactModal.classList.remove('active');
+        // 恢复滚动
+        document.body.style.overflow = 'auto';
+        // 重置表单和成功提示
+        successMessage.classList.remove('active');
+        contactForm.reset();
+    }
+
+    // 绑定打开弹窗事件（所有Contact Us链接）
+    contactLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // 阻止默认锚点跳转
+            openModal();
+        });
+    });
+
+    // 关闭弹窗事件
+    closeModal.addEventListener('click', closeModalFunc);
+    formOverlay.addEventListener('click', closeModalFunc);
+
+    // 表单提交事件
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // 阻止默认提交
+        
+        // 模拟提交（实际项目中替换为AJAX请求）
+        setTimeout(() => {
+            // 隐藏表单，显示成功提示
+            contactForm.style.display = 'none';
+            successMessage.classList.add('active');
+            
+            // 3秒后自动关闭弹窗
+            setTimeout(() => {
+                closeModalFunc();
+                // 恢复表单显示
+                contactForm.style.display = 'flex';
+            }, 3000);
+        }, 1000);
+    });
+
+    // 按ESC键关闭弹窗
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+            closeModalFunc();
+        }
+    });
+</script>
+</body>
+</html>
